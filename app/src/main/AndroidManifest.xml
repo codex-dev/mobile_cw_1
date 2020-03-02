@@ -9,7 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ActHome">
+        <activity
+            android:name=".ui.ActCommon"/>
+        <activity
+            android:name=".ui.ActSearchBreeds" />
+        <activity
+            android:name=".ui.ActIdentifyDog" />
+        <activity
+            android:name=".ui.ActIdentifyBreed"/>
+        <activity
+            android:name=".ui.ActHome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
