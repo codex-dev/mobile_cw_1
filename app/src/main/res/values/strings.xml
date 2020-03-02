@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Mobile Coursework</string>
+
+    <string name="btn_title_identify_the_breed">Identify the Breed</string>
+    <string name="btn_title_identify_the_dog">Identify the Dog</string>
+    <string name="btn_title_search_dog_breeds">Search Dog Breeds</string>
+    <string name="countdown_on">Countdown On</string>
+    <string name="countdown_off">Countdown Off</string>
+</resources>
