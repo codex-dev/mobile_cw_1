@@ -11,6 +11,7 @@
     <string name="btn_next">Next</string>
     <string name="msg_correct">CORRECT!</string>
     <string name="msg_wrong">WRONG!</string>
+    <string name="correct_answer">Correct Answer :</string>
 
     <string name="beagle">Beagle</string>
     <string name="chihuahua">Chihuahua</string>

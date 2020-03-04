@@ -1,23 +1,29 @@
 package com.example.ravindu.mobilecoursework.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ravindu.mobilecoursework.R;
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
-import com.example.ravindu.mobilecoursework.model.DogBreed;
 import com.example.ravindu.mobilecoursework.model.DogImage;
 
 public class ActIdentifyBreed extends ActCommon implements View.OnClickListener {
 
     private static BreedTypes breedTypes;
     private ImageView ivDogImage;
-    private TextView btnSubmit;
+    private TextView tvResult, tvAnswer, btnSubmit;
+    private Spinner spnBreed;
+    private LinearLayout lytResult;
 
     private boolean timerEnabled;
+    private String breedName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +31,10 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         setContentView(R.layout.act_identify_breed);
         setupActionbar(getString(R.string.title_identify_the_breed));
 
-        breedTypes = new BreedTypes();
         intViews();
         setListeners();
 
+        breedTypes = new BreedTypes();
         timerEnabled = getIntent().getBooleanExtra("timerEnabled", false);
 
         if (timerEnabled) {
@@ -43,11 +49,36 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
 
     private void intViews() {
         ivDogImage = findViewById(R.id.ivDogImage);
+        spnBreed = findViewById(R.id.spnBreed);
+        lytResult = findViewById(R.id.lytResult);
+        tvResult = findViewById(R.id.tvResult);
+        tvAnswer = findViewById(R.id.tvAnswer);
         btnSubmit = findViewById(R.id.btnSubmit);
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                getResources().getStringArray(R.array.array_dog_breeds));
+        spnBreed.setAdapter(arrayAdapter);
     }
 
     private void setListeners() {
         btnSubmit.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnSubmit:
+                if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
+                    btnSubmit.setText(getString(R.string.btn_next));
+                    evaluateAnswer();
+                } else if (btnSubmit.getText().equals(getString(R.string.btn_next))) {
+                    btnSubmit.setText(getString(R.string.btn_submit));
+                    lytResult.setVisibility(View.GONE);
+                    setRandomImage();
+                }
+                break;
+        }
     }
 
     private void setRandomImage() {
@@ -78,6 +109,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
                         .getImageList().size() - 1);
             } else {
                 ivDogImage.setImageResource(dogImage.getImageDrawable());
+                breedName = breedTypes.getListDogBreeds().get(indexBreed).getBreedName();
                 dogImage.setHasAppeared(true);
             }
         }
@@ -88,12 +120,21 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         return (int) value;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnSubmit:
-                setRandomImage();
-                break;
+    private void evaluateAnswer() {
+        lytResult.setVisibility(View.VISIBLE);
+
+        if (spnBreed.getSelectedItem().equals(breedName)) { // correct answer
+            tvResult.setText(getString(R.string.msg_correct));
+            tvResult.setTextColor(Color.GREEN);
+            tvResult.setCompoundDrawablesRelativeWithIntrinsicBounds(getDrawable(R.drawable.ic_correct), null, null, null);
+            tvAnswer.setVisibility(View.GONE);
+
+        } else { // wrong answer
+            tvResult.setText(getString(R.string.msg_wrong));
+            tvResult.setTextColor(Color.RED);
+            tvResult.setCompoundDrawablesRelativeWithIntrinsicBounds(getDrawable(R.drawable.ic_wrong), null, null, null);
+            tvAnswer.setVisibility(View.VISIBLE);
+            tvAnswer.setText(getString(R.string.correct_answer) + " " + breedName);
         }
     }
 }
