@@ -12,12 +12,31 @@
     <string name="msg_correct">CORRECT!</string>
     <string name="msg_wrong">WRONG!</string>
 
+    <string name="beagle">Beagle</string>
+    <string name="chihuahua">Chihuahua</string>
+    <string name="siberian_husky">Siberian Husky</string>
+    <string name="doberman">Doberman</string>
+    <string name="golden_retriever">Golden Retriever</string>
+    <string name="boxer">Boxer</string>
+    <string name="rottweiler">Rottweiler</string>
+    <string name="german_shepherd">German Shepherd</string>
+    <string name="shetland_sheepdog">Shetland Sheepdog</string>
+    <string name="afghan_hound">Afghan Hound</string>
+    <string name="french_bulldog">French Bulldog</string>
+    <string name="silky_terrier">Silky Terrier</string>
+
     <string-array name="dog_breeds">
-        <item>ABC</item>
-        <item>DEF</item>
-        <item>GHI</item>
-        <item>JKL</item>
-        <item>MNO</item>
-        <item>PQR</item>
+        <item>@string/afghan_hound</item>
+        <item>@string/beagle</item>
+        <item>@string/boxer</item>
+        <item>@string/chihuahua</item>
+        <item>@string/doberman</item>
+        <item>@string/french_bulldog</item>
+        <item>@string/german_shepherd</item>
+        <item>@string/golden_retriever</item>
+        <item>@string/rottweiler</item>
+        <item>@string/shetland_sheepdog</item>
+        <item>@string/siberian_husky</item>
+        <item>@string/silky_terrier</item>
     </string-array>
 </resources>

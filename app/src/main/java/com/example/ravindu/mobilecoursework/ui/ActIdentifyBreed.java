@@ -1,11 +1,6 @@
 package com.example.ravindu.mobilecoursework.ui;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.appcompat.app.ActionBar;
 
 import com.example.ravindu.mobilecoursework.R;
 

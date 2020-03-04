@@ -8,8 +8,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.ravindu.mobilecoursework.R;
 
 public class ActHome extends ActCommon implements View.OnClickListener,
