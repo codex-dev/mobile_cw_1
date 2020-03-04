@@ -19,8 +19,6 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
 
     private boolean timerEnabled;
 
-    private int count; // only for testing purpose
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +32,13 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         timerEnabled = getIntent().getBooleanExtra("timerEnabled", false);
 
         if (timerEnabled) {
+            //TODO run timer
             Toast.makeText(this, "Timer Enabled", Toast.LENGTH_SHORT).show(); // only for testing purpose
         } else {
             Toast.makeText(this, "Timer Disabled", Toast.LENGTH_SHORT).show(); // only for testing purpose
         }
 
-        showDogImage();
+        setRandomImage();
     }
 
     private void intViews() {
@@ -51,35 +50,57 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         btnSubmit.setOnClickListener(this);
     }
 
-    private void showDogImage() {
-        int imageDrawable = getRandomImage();
-        if (imageDrawable != -1) {
-            ivDogImage.setImageResource(imageDrawable);
-            Toast.makeText(this, "Showing image " + (++count), Toast.LENGTH_SHORT).show(); // only for testing purpose
-        } else {
-            Toast.makeText(this, "End of List Reached", Toast.LENGTH_SHORT).show(); // only for testing purpose
+    private void setRandomImage() {
+
+        /*
+         * for the length of all images {
+         *   generate 2 random numbers within each range; 1<=x<=12, ,1<=y<=5
+         *   get image
+         *   check whether appeared before
+         *   if has appeared, generate another 2 numbers and try again.
+         *   if not, show that image and flag it as appeared
+         * }
+         * */
+
+        int indexBreed = generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+        int indexImage = generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+                .getImageList().size() - 1);
+        boolean hasAppeared = true;
+
+        while (hasAppeared) {
+            DogImage dogImage = breedTypes.getListDogBreeds().get(indexBreed) // dog breed
+                    .getImageList().get(indexImage); // dog image
+            hasAppeared = dogImage.isHasAppeared();
+
+            if (hasAppeared) {
+                indexBreed = generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+                indexImage = generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+                        .getImageList().size() - 1);
+            } else {
+                ivDogImage.setImageResource(dogImage.getImageDrawable());
+                dogImage.setHasAppeared(true);
+            }
         }
     }
 
-    private int getRandomImage() {
-        for (DogBreed dogBreed : breedTypes.getListDogBreeds()) {
-            for (int i = 0; i < dogBreed.getImageList().size(); i++) {
-                DogImage dogImage = dogBreed.getImageList().get(i);
-                if (!dogImage.isHasAppeared()) {
-                    dogImage.setHasAppeared(true);
-                    return dogImage.getImageDrawable();
-                }
-            }
-        }
-        return -1; // all images have been appeared
+    private int generateRandomNumber(int min, int max) {
+        double value = (Math.random() * ((max - min) + 1)) + min;
+        return (int) value;
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSubmit:
-                showDogImage();
+                setRandomImage();
                 break;
         }
     }
 }
+
+/*
+ * References -
+ *
+ * https://dzone.com/articles/random-number-generation-in-java - generate random numbers within a given range
+ *
+ * */

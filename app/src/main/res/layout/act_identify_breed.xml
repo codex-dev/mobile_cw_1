@@ -45,6 +45,36 @@
                 android:entries="@array/array_dog_breeds" />
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_wrong"
+                android:drawablePadding="10dp"
+                android:text="@string/msg_wrong"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Correct Answer : Beagle"
+                android:textColor="@color/btn_shadow"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/btnSubmit"
             android:layout_width="150dp"
@@ -56,41 +86,6 @@
             android:text="@string/btn_submit"
             android:textColor="@color/white"
             android:textSize="17sp" />
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="25dp"-->
-        <!--            android:layout_marginBottom="10dp"-->
-        <!--            android:gravity="center"-->
-        <!--            android:orientation="horizontal">-->
-
-        <!--            <ImageView-->
-        <!--                android:layout_width="20dp"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layout_marginEnd="5dp"-->
-        <!--                android:src="@drawable/ic_wrong"/>-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="10dp"
-            android:drawableStart="@drawable/ic_wrong"
-            android:drawablePadding="10dp"
-            android:text="@string/msg_wrong"
-            android:textColor="@color/red"
-            android:textSize="18sp" />
-        <!--        </LinearLayout>-->
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Correct Answer : Beagle"
-            android:textColor="@color/btn_shadow"
-            android:textSize="16sp" />
     </LinearLayout>
 
 </ScrollView>
