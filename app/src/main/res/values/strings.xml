@@ -25,7 +25,7 @@
     <string name="french_bulldog">French Bulldog</string>
     <string name="silky_terrier">Silky Terrier</string>
 
-    <string-array name="dog_breeds">
+    <string-array name="array_dog_breeds">
         <item>@string/afghan_hound</item>
         <item>@string/beagle</item>
         <item>@string/boxer</item>

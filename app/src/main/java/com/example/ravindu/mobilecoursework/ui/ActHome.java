@@ -47,11 +47,13 @@ public class ActHome extends ActCommon implements View.OnClickListener,
         switch (view.getId()) {
             case R.id.btnIdentifyBreed:
                 intent = new Intent(ActHome.this, ActIdentifyBreed.class);
+                intent.putExtra("timerEnabled", switchTimer.isChecked());
                 startActivity(intent);
                 break;
 
             case R.id.btnIdentifyDog:
                 intent = new Intent(ActHome.this, ActIdentifyDog.class);
+                intent.putExtra("timerEnabled", switchTimer.isChecked());
                 startActivity(intent);
                 break;
 

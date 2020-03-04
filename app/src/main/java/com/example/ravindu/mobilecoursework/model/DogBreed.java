@@ -9,9 +9,9 @@ public class DogBreed {
 
     private String breedId;
     private String breedName;
-    private ArrayList<Integer> imageList;
+    private ArrayList<DogImage> imageList;
 
-    public DogBreed(String breedId, String breedName, ArrayList<Integer> imageList) {
+    public DogBreed(String breedId, String breedName, ArrayList<DogImage> imageList) {
         this.breedId = breedId;
         this.breedName = breedName;
         this.imageList = imageList;
@@ -33,11 +33,11 @@ public class DogBreed {
         this.breedName = breedName;
     }
 
-    public ArrayList<Integer> getImageList() {
+    public ArrayList<DogImage> getImageList() {
         return imageList;
     }
 
-    public void setImageList(ArrayList<Integer> imageList) {
+    public void setImageList(ArrayList<DogImage> imageList) {
         this.imageList = imageList;
     }
 }
