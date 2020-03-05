@@ -107,6 +107,11 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSubmit:
+
+                if (timerEnabled && countDownTimer != null) {
+                    countDownTimer.cancel(); // stop currently running countdown timer
+                }
+
                 if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
                     btnSubmit.setText(getString(R.string.btn_next));
                     evaluateAnswer();

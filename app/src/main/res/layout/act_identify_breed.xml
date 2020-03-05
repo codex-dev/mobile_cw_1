@@ -96,7 +96,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:background="@drawable/bg_btn_filled"
+            android:background="@drawable/btn_selector"
             android:gravity="center"
             android:text="@string/btn_submit"
             android:textColor="@color/white"
