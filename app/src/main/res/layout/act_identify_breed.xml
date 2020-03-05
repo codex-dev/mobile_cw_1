@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:scrollbars="vertical"
     tools:context=".ui.ActIdentifyBreed">
 
     <LinearLayout
@@ -16,10 +17,21 @@
 
         <ImageView
             android:id="@+id/ivDogImage"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:src="@drawable/img_beagle_3" />
+
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/remaining_time"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="match_parent"
@@ -72,10 +84,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Correct Answer : Beagle"
+                android:text="@string/correct_answer"
                 android:textColor="@color/btn_shadow"
                 android:textSize="16sp"
-                android:visibility="visible"/>
+                android:visibility="visible" />
         </LinearLayout>
 
         <TextView

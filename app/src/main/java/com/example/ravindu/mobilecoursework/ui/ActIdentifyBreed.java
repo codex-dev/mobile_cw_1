@@ -2,13 +2,13 @@ package com.example.ravindu.mobilecoursework.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ravindu.mobilecoursework.R;
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
@@ -17,13 +17,17 @@ import com.example.ravindu.mobilecoursework.model.DogImage;
 public class ActIdentifyBreed extends ActCommon implements View.OnClickListener {
 
     private static BreedTypes breedTypes;
+
     private ImageView ivDogImage;
-    private TextView tvResult, tvAnswer, btnSubmit;
+    private TextView tvTimer, tvResult, tvAnswer, btnSubmit;
     private Spinner spnBreed;
     private LinearLayout lytResult;
+    private CountDownTimer countDownTimer;
 
     private boolean timerEnabled;
     private String breedName;
+    private long remainingTime;
+    private final long timerResetValue = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +38,55 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         intViews();
         setListeners();
 
+        remainingTime = timerResetValue;
         breedTypes = new BreedTypes();
         timerEnabled = getIntent().getBooleanExtra("timerEnabled", false);
-
-        if (timerEnabled) {
-            //TODO run timer
-            Toast.makeText(this, "Timer Enabled", Toast.LENGTH_SHORT).show(); // only for testing purpose
-        } else {
-            Toast.makeText(this, "Timer Disabled", Toast.LENGTH_SHORT).show(); // only for testing purpose
-        }
 
         setRandomImage();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startCountDown();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timerEnabled && countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+    }
+
+    private void startCountDown() {
+        if (timerEnabled && remainingTime > 0) {
+            tvTimer.setVisibility(View.VISIBLE);
+
+            countDownTimer = new CountDownTimer(remainingTime, 1000) {
+                @Override
+                public void onTick(long millisLeft) {
+                    remainingTime = millisLeft;
+                    int seconds = (int) (millisLeft / 1000);
+
+                    tvTimer.setText(String.format(getString(R.string.remaining_time)
+                            +" %02d:%02d",0,seconds));
+                }
+
+                @Override
+                public void onFinish() {
+                    tvTimer.setText(getString(R.string.remaining_time) + " 00:00");
+                    if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
+                        btnSubmit.performClick();
+                    }
+                }
+            }.start();
+        }
+    }
+
     private void intViews() {
         ivDogImage = findViewById(R.id.ivDogImage);
+        tvTimer = findViewById(R.id.tvTimer);
         spnBreed = findViewById(R.id.spnBreed);
         lytResult = findViewById(R.id.lytResult);
         tvResult = findViewById(R.id.tvResult);
@@ -75,7 +113,11 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
                 } else if (btnSubmit.getText().equals(getString(R.string.btn_next))) {
                     btnSubmit.setText(getString(R.string.btn_submit));
                     lytResult.setVisibility(View.GONE);
+                    spnBreed.setSelection(0); // reset spinner
                     setRandomImage();
+
+                    remainingTime = timerResetValue;  // reset timer
+                    startCountDown();
                 }
                 break;
         }
@@ -143,5 +185,6 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
  * References -
  *
  * https://dzone.com/articles/random-number-generation-in-java - generate random numbers within a given range
- *
+ * https://stackoverflow.com/a/46382882 - Use string resources to load values to spinner
+ * https://stackoverflow.com/a/10032406 - Countdown timer in Android
  * */
