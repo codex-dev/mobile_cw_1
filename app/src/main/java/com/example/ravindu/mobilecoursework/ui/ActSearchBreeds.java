@@ -10,6 +10,6 @@ public class ActSearchBreeds extends ActCommon {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_search_breeds);
-        setTitle(R.string.title_search_dog_breeds);
+        setupActionbar(getString(R.string.title_search_dog_breeds));
     }
 }

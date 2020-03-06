@@ -10,15 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.ActCommon"/>
+            android:name=".ui.ActCommon"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".ui.ActSearchBreeds" />
+            android:name=".ui.ActSearchBreeds"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".ui.ActIdentifyDog" />
+            android:name=".ui.ActIdentifyDog"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".ui.ActIdentifyBreed"/>
+            android:name=".ui.ActIdentifyBreed"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
-            android:name=".ui.ActHome">
+            android:name=".ui.ActHome"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,3 +33,10 @@
     </application>
 
 </manifest>
+
+<!--
+References
+
+* https://stackoverflow.com/a/12504768 - Activity lifecycle - onCreate called on every re-orientation
+
+-->

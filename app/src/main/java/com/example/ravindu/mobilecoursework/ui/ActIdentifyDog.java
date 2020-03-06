@@ -10,6 +10,6 @@ public class ActIdentifyDog extends ActCommon {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_identify_dog);
-        setTitle(R.string.title_identify_the_dog);
+        setupActionbar(getString(R.string.title_identify_the_dog));
     }
 }
