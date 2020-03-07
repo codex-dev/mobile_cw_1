@@ -150,6 +150,14 @@ public class BreedTypes {
     public ArrayList<DogBreed> getListDogBreeds() {
         return listDogBreeds;
     }
+
+    public int getAllImagesCount() {
+        int imageCount = 0;
+        for (DogBreed dogBreed : listDogBreeds) {
+            imageCount += dogBreed.getImageList().size();
+        }
+        return imageCount;
+    }
 }
 
 /*

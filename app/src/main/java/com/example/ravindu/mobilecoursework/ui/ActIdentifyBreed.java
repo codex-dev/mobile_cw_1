@@ -9,11 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ravindu.mobilecoursework.R;
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
-import com.example.ravindu.mobilecoursework.model.DogImage;
-import com.example.ravindu.mobilecoursework.util.RandomImages;
+import com.example.ravindu.mobilecoursework.model.RandomPickResponse;
+import com.example.ravindu.mobilecoursework.util.RandomPick;
 
 public class ActIdentifyBreed extends ActCommon implements View.OnClickListener {
 
@@ -25,10 +26,11 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     private LinearLayout lytResult;
     private CountDownTimer countDownTimer;
 
-    private boolean timerEnabled;
-    private String breedName;
-    private long remainingTime;
-    private final long timerResetValue = 10000;
+    private boolean timerEnabled; // whether countdown timer is enabled
+    private String breedName; // selected breed name for the question
+    private long remainingTime; // remaining time to continue countdown (when resumed)
+    private final long timerResetValue = 10000; // default countdown time period
+    private int nextClickCCount = 0; // next button click count
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,59 +111,45 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnSubmit:
-                if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
-                    if (timerEnabled && countDownTimer != null) {
-                        tvTimer.setText(getString(R.string.remaining_time) + " 00:00");
-                        countDownTimer.cancel(); // stop currently running countdown timer. otherwise 2 or more CDTs would run in parallel.
-                    }
-                    btnSubmit.setText(getString(R.string.btn_next));
-                    evaluateAnswer();
-                } else if (btnSubmit.getText().equals(getString(R.string.btn_next))) {
+        if (view.getId() == R.id.btnSubmit) {
+            if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
+                btnSubmit.setText(getString(R.string.btn_next));
+                spnBreed.setEnabled(false);
+                if (timerEnabled && countDownTimer != null) {
+                    tvTimer.setText(getString(R.string.remaining_time) + " 00:00");
+                    countDownTimer.cancel(); // stop currently running countdown timer. otherwise 2 or more CDTs would run in parallel.
+                }
+                evaluateAnswer();
+
+            } else if (btnSubmit.getText().equals(getString(R.string.btn_next))) {
+                if (setRandomImage()) {
                     btnSubmit.setText(getString(R.string.btn_submit));
-                    lytResult.setVisibility(View.GONE);
+                    spnBreed.setEnabled(true);
                     spnBreed.setSelection(0); // reset spinner
-                    setRandomImage();
+                    lytResult.setVisibility(View.GONE);
 
                     remainingTime = timerResetValue;  // reset timer
                     startCountDown();
                 }
-                break;
+            }
+//            setRandomImage(); // for testing purpose
         }
     }
 
     // pick and set random dog image
-    private void setRandomImage() {
-        /* --- LOGIC ---
-         * for the length of all images {
-         *   generate 2 random numbers within each range; 1<=x<=12, ,1<=y<=5
-         *   get image
-         *   check whether appeared before
-         *   if has appeared, generate another 2 numbers and try again.
-         *   if not, show that image and flag it as appeared
-         * }
-         * */
+    private boolean setRandomImage() {
+        if (nextClickCCount < breedTypes.getAllImagesCount()) {
+            nextClickCCount++;
+            RandomPickResponse randomPickResponse = RandomPick.pickRandomImage(breedTypes);
+            breedName = randomPickResponse.getSelectedBreed();
+            breedTypes = randomPickResponse.getBreedTypes();
+            ivDogImage.setImageResource(randomPickResponse.getSelectedDogImagesList().get(0).getImageDrawable());
 
-        int indexBreed = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
-        int indexImage = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
-                .getImageList().size() - 1);
-        boolean hasAppeared = true;
-
-        while (hasAppeared) {
-            DogImage dogImage = breedTypes.getListDogBreeds().get(indexBreed) // dog breed
-                    .getImageList().get(indexImage); // dog image
-            hasAppeared = dogImage.isHasAppeared();
-
-            if (hasAppeared) {
-                indexBreed = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
-                indexImage = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
-                        .getImageList().size() - 1);
-            } else {
-                ivDogImage.setImageResource(dogImage.getImageDrawable());
-                breedName = breedTypes.getListDogBreeds().get(indexBreed).getBreedName();
-                dogImage.setHasAppeared(true);
-            }
+            Toast.makeText(this, "Image No. " + nextClickCCount, Toast.LENGTH_SHORT).show(); // for testing purpose
+            return true; // return true if setting next random image is successful.
+        } else {
+            Toast.makeText(this, getString(R.string.no_images_left), Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 
