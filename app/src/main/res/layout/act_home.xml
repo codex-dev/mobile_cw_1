@@ -24,37 +24,26 @@
 
         <TextView
             android:id="@+id/btnIdentifyBreed"
+            style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/btn_selector"
-            android:gravity="center"
-            android:text="@string/title_identify_the_breed"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:text="@string/title_identify_the_breed" />
 
         <TextView
             android:id="@+id/btnIdentifyDog"
+            style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/btn_selector"
-            android:gravity="center"
-            android:text="@string/title_identify_the_dog"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:text="@string/title_identify_the_dog" />
 
         <TextView
             android:id="@+id/btnSearchBreeds"
+            style="@style/ButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/btn_selector"
-            android:gravity="center"
-            android:text="@string/title_search_dog_breeds"
-            android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:text="@string/title_search_dog_breeds" />
 
     </LinearLayout>
 </RelativeLayout>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.ravindu.mobilecoursework.R;
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
 import com.example.ravindu.mobilecoursework.model.DogImage;
+import com.example.ravindu.mobilecoursework.util.RandomNumber;
 
 public class ActIdentifyBreed extends ActCommon implements View.OnClickListener {
 
@@ -70,7 +71,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
                     int seconds = (int) (millisLeft / 1000);
 
                     tvTimer.setText(String.format(getString(R.string.remaining_time)
-                            +" %02d:%02d",0,seconds));
+                            + " %02d:%02d", 0, seconds));
                 }
 
                 @Override
@@ -107,12 +108,11 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSubmit:
-
-                if (timerEnabled && countDownTimer != null) {
-                    countDownTimer.cancel(); // stop currently running countdown timer
-                }
-
                 if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
+                    if (timerEnabled && countDownTimer != null) {
+                        tvTimer.setText(getString(R.string.remaining_time) + " 00:00");
+                        countDownTimer.cancel(); // stop currently running countdown timer
+                    }
                     btnSubmit.setText(getString(R.string.btn_next));
                     evaluateAnswer();
                 } else if (btnSubmit.getText().equals(getString(R.string.btn_next))) {
@@ -140,8 +140,8 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
          * }
          * */
 
-        int indexBreed = generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
-        int indexImage = generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+        int indexBreed = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+        int indexImage = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
                 .getImageList().size() - 1);
         boolean hasAppeared = true;
 
@@ -151,8 +151,8 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
             hasAppeared = dogImage.isHasAppeared();
 
             if (hasAppeared) {
-                indexBreed = generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
-                indexImage = generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+                indexBreed = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+                indexImage = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
                         .getImageList().size() - 1);
             } else {
                 ivDogImage.setImageResource(dogImage.getImageDrawable());
@@ -162,10 +162,6 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         }
     }
 
-    private int generateRandomNumber(int min, int max) {
-        double value = (Math.random() * ((max - min) + 1)) + min;
-        return (int) value;
-    }
 
     private void evaluateAnswer() {
         lytResult.setVisibility(View.VISIBLE);
