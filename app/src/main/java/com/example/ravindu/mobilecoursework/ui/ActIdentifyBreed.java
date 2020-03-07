@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.example.ravindu.mobilecoursework.R;
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
 import com.example.ravindu.mobilecoursework.model.DogImage;
-import com.example.ravindu.mobilecoursework.util.RandomNumber;
+import com.example.ravindu.mobilecoursework.util.RandomImages;
 
 public class ActIdentifyBreed extends ActCommon implements View.OnClickListener {
 
@@ -39,8 +39,8 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         intViews();
         setEventListeners();
 
-        remainingTime = timerResetValue;
         breedTypes = new BreedTypes();
+        remainingTime = timerResetValue;
         timerEnabled = getIntent().getBooleanExtra("timerEnabled", false);
 
         setRandomImage();
@@ -143,8 +143,8 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
          * }
          * */
 
-        int indexBreed = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
-        int indexImage = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+        int indexBreed = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+        int indexImage = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
                 .getImageList().size() - 1);
         boolean hasAppeared = true;
 
@@ -154,8 +154,8 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
             hasAppeared = dogImage.isHasAppeared();
 
             if (hasAppeared) {
-                indexBreed = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
-                indexImage = RandomNumber.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+                indexBreed = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+                indexImage = RandomImages.generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
                         .getImageList().size() - 1);
             } else {
                 ivDogImage.setImageResource(dogImage.getImageDrawable());
