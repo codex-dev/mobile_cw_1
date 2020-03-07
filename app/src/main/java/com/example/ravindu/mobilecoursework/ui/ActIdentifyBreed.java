@@ -60,6 +60,28 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         }
     }
 
+    // initialize each view
+    private void intViews() {
+        ivDogImage = findViewById(R.id.ivDogImage);
+        tvTimer = findViewById(R.id.tvTimer);
+        spnBreed = findViewById(R.id.spnBreed);
+        lytResult = findViewById(R.id.lytResult);
+        tvResult = findViewById(R.id.tvResult);
+        tvAnswer = findViewById(R.id.tvAnswer);
+        btnSubmit = findViewById(R.id.btnSubmit);
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                getResources().getStringArray(R.array.array_dog_breeds));
+        spnBreed.setAdapter(arrayAdapter);
+    }
+
+    // set event listeners for views
+    private void setEventListeners() {
+        btnSubmit.setOnClickListener(this);
+    }
+
+    // start countdown timer
     private void startCountDown() {
         if (timerEnabled && remainingTime > 0) {
             tvTimer.setVisibility(View.VISIBLE);
@@ -85,25 +107,6 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         }
     }
 
-    private void intViews() {
-        ivDogImage = findViewById(R.id.ivDogImage);
-        tvTimer = findViewById(R.id.tvTimer);
-        spnBreed = findViewById(R.id.spnBreed);
-        lytResult = findViewById(R.id.lytResult);
-        tvResult = findViewById(R.id.tvResult);
-        tvAnswer = findViewById(R.id.tvAnswer);
-        btnSubmit = findViewById(R.id.btnSubmit);
-
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                getResources().getStringArray(R.array.array_dog_breeds));
-        spnBreed.setAdapter(arrayAdapter);
-    }
-
-    private void setEventListeners() {
-        btnSubmit.setOnClickListener(this);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -111,7 +114,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
                 if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
                     if (timerEnabled && countDownTimer != null) {
                         tvTimer.setText(getString(R.string.remaining_time) + " 00:00");
-                        countDownTimer.cancel(); // stop currently running countdown timer
+                        countDownTimer.cancel(); // stop currently running countdown timer. otherwise 2 or more CDTs would run in parallel.
                     }
                     btnSubmit.setText(getString(R.string.btn_next));
                     evaluateAnswer();
@@ -128,9 +131,9 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         }
     }
 
+    // pick and set random dog image
     private void setRandomImage() {
-
-        /*
+        /* --- LOGIC ---
          * for the length of all images {
          *   generate 2 random numbers within each range; 1<=x<=12, ,1<=y<=5
          *   get image
@@ -162,7 +165,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         }
     }
 
-
+    // check whether answer is correct or wrong
     private void evaluateAnswer() {
         lytResult.setVisibility(View.VISIBLE);
 
