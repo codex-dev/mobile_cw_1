@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Mobile Coursework</string>
 
+    <!-- Content Descriptions -->
+    <string name="dog_image">Dog Image</string>
+
+    <!-- UI Strings -->
     <string name="title_identify_the_breed">Identify the Breed</string>
     <string name="title_identify_the_dog">Identify the Dog</string>
     <string name="title_search_dog_breeds">Search Dog Breeds</string>
     <string name="countdown_on">Countdown Timer On</string>
     <string name="countdown_off">Countdown Timer Off</string>
-    <string name="select_breed">Select Breed</string>
+    <string name="select_breed">Select the breed</string>
+    <string name="select_dog_image">Select the dog image :</string>
     <string name="btn_submit">Submit</string>
     <string name="btn_next">Next</string>
     <string name="msg_correct">CORRECT!</string>
@@ -14,6 +19,7 @@
     <string name="correct_answer">Correct Answer :</string>
     <string name="remaining_time">Remaining Time</string>
 
+    <!-- Dog Breeds -->
     <string name="beagle">Beagle</string>
     <string name="chihuahua">Chihuahua</string>
     <string name="siberian_husky">Siberian Husky</string>

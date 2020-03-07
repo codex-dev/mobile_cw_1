@@ -9,24 +9,25 @@
     tools:context=".ui.ActIdentifyBreed">
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:gravity="center_horizontal"
+        android:padding="15dp">
 
         <ImageView
             android:id="@+id/ivDogImage"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="250dp"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:src="@drawable/img_beagle_3" />
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:background="@drawable/bg_grey_outline"
+            android:contentDescription="@string/dog_image"/>
 
         <TextView
             android:id="@+id/tvTimer"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/remaining_time"
@@ -35,7 +36,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/select_breed"
@@ -43,23 +44,22 @@
             android:textSize="17sp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_spinner_outline"
+            android:background="@drawable/bg_grey_outline"
             android:padding="5dp">
 
             <Spinner
                 android:id="@+id/spnBreed"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="match_parent"
                 android:entries="@array/array_dog_breeds" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lytResult"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="10dp"
@@ -93,8 +93,7 @@
             android:id="@+id/btnSubmit"
             style="@style/ButtonStyle"
             android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="45dp"
             android:layout_marginTop="30dp"
             android:text="@string/btn_submit" />
     </LinearLayout>

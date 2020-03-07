@@ -37,7 +37,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         setupActionbar(getString(R.string.title_identify_the_breed));
 
         intViews();
-        setListeners();
+        setEventListeners();
 
         remainingTime = timerResetValue;
         breedTypes = new BreedTypes();
@@ -100,7 +100,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         spnBreed.setAdapter(arrayAdapter);
     }
 
-    private void setListeners() {
+    private void setEventListeners() {
         btnSubmit.setOnClickListener(this);
     }
 
