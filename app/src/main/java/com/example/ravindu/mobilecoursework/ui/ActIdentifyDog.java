@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.example.ravindu.mobilecoursework.R;
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
 import com.example.ravindu.mobilecoursework.model.DogBreed;
-import com.example.ravindu.mobilecoursework.model.DogImage;
 
 public class ActIdentifyDog extends ActCommon implements View.OnClickListener {
 

@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.ravindu.mobilecoursework.R;
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
-import com.example.ravindu.mobilecoursework.model.RandomPickResponse;
 import com.example.ravindu.mobilecoursework.util.RandomPick;
 
 public class ActIdentifyBreed extends ActCommon implements View.OnClickListener {
@@ -94,8 +93,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
                     remainingTime = millisLeft;
                     int seconds = (int) (millisLeft / 1000);
 
-                    tvTimer.setText(String.format(getString(R.string.remaining_time)
-                            + " %02d:%02d", 0, seconds));
+                    tvTimer.setText(String.format(getString(R.string.remaining_time) + " %02d:%02d", 0, seconds));
                 }
 
                 @Override
@@ -140,10 +138,10 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     private boolean setRandomImage() {
         if (nextClickCCount < breedTypes.getAllImagesCount()) {
             nextClickCCount++;
-            RandomPickResponse randomPickResponse = RandomPick.pickRandomImage(breedTypes);
-            breedName = randomPickResponse.getSelectedBreed();
-            breedTypes = randomPickResponse.getBreedTypes();
-            ivDogImage.setImageResource(randomPickResponse.getSelectedDogImagesList().get(0).getImageDrawable());
+            RandomPick.Response response = RandomPick.pickRandomImage(breedTypes);
+            breedName = response.getSelectedBreed();
+            breedTypes = response.getBreedTypes();
+            ivDogImage.setImageResource(response.getSelectedDogImagesList().get(0).getImageDrawable());
 
             Toast.makeText(this, "Image No. " + nextClickCCount, Toast.LENGTH_SHORT).show(); // for testing purpose
             return true; // return true if setting next random image is successful.

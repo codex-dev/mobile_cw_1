@@ -2,7 +2,6 @@ package com.example.ravindu.mobilecoursework.util;
 
 import com.example.ravindu.mobilecoursework.common.BreedTypes;
 import com.example.ravindu.mobilecoursework.model.DogImage;
-import com.example.ravindu.mobilecoursework.model.RandomPickResponse;
 
 import java.util.ArrayList;
 
@@ -10,12 +9,13 @@ import java.util.ArrayList;
  * Created by Ravindu Fernando on 2020-03-04 at 11:18 PM
  */
 public class RandomPick {
-    public static int generateRandomNumber(int min, int max) {
+
+    private static int generateRandomNumber(int min, int max) {
         double value = (Math.random() * ((max - min) + 1)) + min;
         return (int) value;
     }
 
-    public static RandomPickResponse pickRandomImage(BreedTypes breedTypes) {
+    public static Response pickRandomImage(BreedTypes breedTypes) {
         /* --- LOGIC ---
          * for the length of all images {
          *   generate 2 random numbers within each range; 1<=x<=12, ,1<=y<=5
@@ -26,7 +26,7 @@ public class RandomPick {
          * }
          * */
 
-        RandomPickResponse randomPickResponse = null;
+        Response response = null;
 
         int indexBreed = generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
         int indexImage = generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
@@ -46,14 +46,52 @@ public class RandomPick {
                 dogImage.setHasAppeared(true);
                 String breedName = breedTypes.getListDogBreeds().get(indexBreed).getBreedName();
 
-                randomPickResponse = new RandomPickResponse();
-                randomPickResponse.setSelectedBreed(breedName);
-                randomPickResponse.setSelectedDogImagesList(new ArrayList<DogImage>(){{
+                response = new Response();
+                response.setSelectedBreed(breedName);
+                response.setSelectedDogImagesList(new ArrayList<DogImage>(){{
                     add(dogImage);
                 }});
-                randomPickResponse.setBreedTypes(breedTypes);
+                response.setBreedTypes(breedTypes);
             }
         }
-        return randomPickResponse;
+        return response;
+    }
+
+    public static class Response {
+
+        private String selectedBreed;
+        private ArrayList<DogImage> listSelectedDogImages;
+        private BreedTypes breedTypes;
+
+        public String getSelectedBreed() {
+            return selectedBreed;
+        }
+
+        void setSelectedBreed(String selectedBreed) {
+            this.selectedBreed = selectedBreed;
+        }
+
+        public ArrayList<DogImage> getSelectedDogImagesList() {
+            return listSelectedDogImages;
+        }
+
+        void setSelectedDogImagesList(ArrayList<DogImage> listSelectedDogImages) {
+            this.listSelectedDogImages = listSelectedDogImages;
+        }
+
+        public BreedTypes getBreedTypes() {
+            return breedTypes;
+        }
+
+        void setBreedTypes(BreedTypes breedTypes) {
+            this.breedTypes = breedTypes;
+        }
     }
 }
+
+/*
+* References -
+*
+* https://www.geeksforgeeks.org/static-class-in-java/ - Static class in Java
+* */
+

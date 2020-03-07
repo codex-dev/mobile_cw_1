@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.example.ravindu.mobilecoursework.R;
 
+import java.util.Objects;
+
 public class ActHome extends ActCommon implements View.OnClickListener,
         CompoundButton.OnCheckedChangeListener {
 
@@ -20,7 +22,7 @@ public class ActHome extends ActCommon implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_home);
-        getSupportActionBar().hide(); // hide action bar in home activity
+        Objects.requireNonNull(getSupportActionBar()).hide(); // hide action bar in home activity
 
         initViews();
         setListeners();
@@ -75,3 +77,8 @@ public class ActHome extends ActCommon implements View.OnClickListener,
         }
     }
 }
+
+/*
+* References -
+* https://stackoverflow.com/a/45632962 - Why should one use Objects.requireNonNull()?
+* */

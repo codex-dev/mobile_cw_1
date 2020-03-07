@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class BreedTypes {
 
-    private DogBreed beagle = new DogBreed("n02088364", "Beagle",
+    private final DogBreed beagle = new DogBreed("n02088364", "Beagle",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_beagle_1));
                 add(new DogImage(R.drawable.img_beagle_2));
@@ -21,7 +21,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed chihuahua = new DogBreed("n02085620", "Chihuahua",
+    private final DogBreed chihuahua = new DogBreed("n02085620", "Chihuahua",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_chihuahua_1));
                 add(new DogImage(R.drawable.img_chihuahua_2));
@@ -31,7 +31,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed siberian_husky = new DogBreed("n02110185", "Siberian Husky",
+    private final DogBreed siberian_husky = new DogBreed("n02110185", "Siberian Husky",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_siberian_husky_1));
                 add(new DogImage(R.drawable.img_siberian_husky_2));
@@ -41,7 +41,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed doberman = new DogBreed("n02107142", "Doberman",
+    private final DogBreed doberman = new DogBreed("n02107142", "Doberman",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_doberman_1));
                 add(new DogImage(R.drawable.img_doberman_2));
@@ -51,7 +51,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed golden_retriever = new DogBreed("n02099601", "Golden Retriever",
+    private final DogBreed golden_retriever = new DogBreed("n02099601", "Golden Retriever",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_golden_retriever_1));
                 add(new DogImage(R.drawable.img_golden_retriever_2));
@@ -61,7 +61,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed boxer = new DogBreed("n02108089", "Boxer",
+    private final DogBreed boxer = new DogBreed("n02108089", "Boxer",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_boxer_1));
                 add(new DogImage(R.drawable.img_boxer_2));
@@ -71,7 +71,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed rottweiler = new DogBreed("n02106550", "Rottweiler",
+    private final DogBreed rottweiler = new DogBreed("n02106550", "Rottweiler",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_rottweiler_1));
                 add(new DogImage(R.drawable.img_rottweiler_2));
@@ -81,7 +81,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed german_shepherd = new DogBreed("n02106662", "German Shepherd",
+    private final DogBreed german_shepherd = new DogBreed("n02106662", "German Shepherd",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_german_shepherd_1));
                 add(new DogImage(R.drawable.img_german_shepherd_2));
@@ -91,7 +91,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed shetland_sheepdog = new DogBreed("n02105855", "Shetland Sheepdog",
+    private final DogBreed shetland_sheepdog = new DogBreed("n02105855", "Shetland Sheepdog",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_shetland_sheepdog_1));
                 add(new DogImage(R.drawable.img_shetland_sheepdog_2));
@@ -101,7 +101,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed afghan_hound = new DogBreed("n02088094", "Afghan Hound",
+    private final DogBreed afghan_hound = new DogBreed("n02088094", "Afghan Hound",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_afghan_hound_1));
                 add(new DogImage(R.drawable.img_afghan_hound_2));
@@ -111,7 +111,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed french_bulldog = new DogBreed("n02088094", "French Bulldog",
+    private final DogBreed french_bulldog = new DogBreed("n02088094", "French Bulldog",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_french_bulldog_1));
                 add(new DogImage(R.drawable.img_french_bulldog_2));
@@ -121,7 +121,7 @@ public class BreedTypes {
             }});
 
 
-    private DogBreed silky_terrier = new DogBreed("n02097658", "Silky Terrier",
+    private final DogBreed silky_terrier = new DogBreed("n02097658", "Silky Terrier",
             new ArrayList<DogImage>() {{
                 add(new DogImage(R.drawable.img_silky_terrier_1));
                 add(new DogImage(R.drawable.img_silky_terrier_2));
@@ -131,7 +131,7 @@ public class BreedTypes {
             }});
 
 
-    private ArrayList<DogBreed> listDogBreeds = new ArrayList<DogBreed>() {{
+    private final ArrayList<DogBreed> listDogBreeds = new ArrayList<DogBreed>() {{
         add(afghan_hound);
         add(beagle);
         add(boxer);

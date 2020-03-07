@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ravindu.mobilecoursework.R;
 
+import java.util.Objects;
+
 public class ActCommon extends AppCompatActivity {
 
     @Override
@@ -21,7 +23,7 @@ public class ActCommon extends AppCompatActivity {
     }
 
     protected void setupActionbar(String title) {
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
         View actionbarView = getSupportActionBar().getCustomView();
 
@@ -37,3 +39,9 @@ public class ActCommon extends AppCompatActivity {
         tvTitle.setText(title);
     }
 }
+
+/*
+ * References -
+ * https://stackoverflow.com/a/45632962 - Why should one use Objects.requireNonNull()?
+ * */
+
