@@ -90,7 +90,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
         etSearchText.clearFocus();
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Objects.requireNonNull(in).hideSoftInputFromWindow(etSearchText.getWindowToken(), 0);
-        Toast.makeText(this, "Images Fetched for \"" + text + "\"", Toast.LENGTH_SHORT).show(); // for testing purpose
+        Toast.makeText(this, "Images fetched for \"" + text + "\"", Toast.LENGTH_SHORT).show(); // for testing purpose
 
         // load relevant breed images as the result
         for (DogBreed dogBreed : breedTypes.getListDogBreeds()) {
@@ -144,7 +144,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
         ivDogImage.clearAnimation();
 
         previousIndex = -1;
-        Toast.makeText(this, "Slideshow Stopped", Toast.LENGTH_SHORT).show(); // for testing purpose
+        Toast.makeText(this, "Slideshow Stopped", Toast.LENGTH_SHORT).show();
     }
 
     @Override

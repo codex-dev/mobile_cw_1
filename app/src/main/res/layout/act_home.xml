@@ -1,49 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
     tools:context=".ui.ActHome">
 
-    <Switch
-        android:id="@+id/switchTimer"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="@string/countdown_off"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
+        android:padding="15dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/btnIdentifyBreed"
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/title_identify_the_breed" />
+        <Switch
+            android:id="@+id/switchTimer"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="50dp"
+            android:text="@string/countdown_off"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/btnIdentifyDog"
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/title_identify_the_dog" />
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/btnSearchBreeds"
-            style="@style/ButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/title_search_dog_breeds" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:src="@drawable/ico_dog_seatting"
+                android:tint="@color/btn_bg" />
 
+            <TextView
+                android:id="@+id/btnIdentifyBreed"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/title_identify_the_breed" />
+
+            <TextView
+                android:id="@+id/btnIdentifyDog"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/title_identify_the_dog" />
+
+            <TextView
+                android:id="@+id/btnSearchBreeds"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/title_search_dog_breeds" />
+
+        </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</ScrollView>

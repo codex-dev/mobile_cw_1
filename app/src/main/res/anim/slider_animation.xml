@@ -4,16 +4,16 @@
     <translate
         android:duration="100"
         android:fromXDelta="-100%p"
-        android:toXDelta="0%p" />  <!--  change this to decide the range-->
+        android:toXDelta="0%p" /> <!-- image enters from left side within 100ms -->
 
     <translate
         android:duration="100"
         android:fromXDelta="0%p"
         android:startOffset="4900"
-        android:toXDelta="100%p" /><!-- change this to increase the time for image to stay -->
+        android:toXDelta="100%p" /> <!-- image exits from right side within 100ms after 4900ms spent -->
 </set>
 
-    <!--
-    Reference -
-    * https://stackoverflow.com/a/12858250
-    -->
+<!--
+  Reference -
+* https://stackoverflow.com/a/12858250
+-->
