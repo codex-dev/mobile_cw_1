@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mobile Coursework</string>
+    <string name="app_name">PawMate</string>
 
     <!-- Content Descriptions -->
     <string name="dog_image">Dog Image</string>

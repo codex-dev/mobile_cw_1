@@ -1,6 +1,7 @@
 package com.example.ravindu.mobilecoursework.ui;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,11 +19,11 @@ public class ActCommon extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_common);
-        setupActionbar("");
+        setupActionbar("",false);
 
     }
 
-    protected void setupActionbar(String title) {
+    protected void setupActionbar(String title, boolean showBackIcon) {
         Objects.requireNonNull(getSupportActionBar()).setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar);
         View actionbarView = getSupportActionBar().getCustomView();
@@ -30,12 +31,19 @@ public class ActCommon extends AppCompatActivity {
         ImageView ivBack = actionbarView.findViewById(R.id.ivBack);
         TextView tvTitle = actionbarView.findViewById(R.id.tvTitle);
 
-        ivBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        if (showBackIcon) {
+            ivBack.setVisibility(View.VISIBLE);
+            tvTitle.setGravity(Gravity.CENTER);
+            ivBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressed();
+                }
+            });
+        } else {
+            ivBack.setVisibility(View.GONE);
+            tvTitle.setGravity(Gravity.START);
+        }
         tvTitle.setText(title);
     }
 }

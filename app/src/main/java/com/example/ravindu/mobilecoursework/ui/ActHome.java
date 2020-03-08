@@ -22,7 +22,8 @@ public class ActHome extends ActCommon implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_home);
-        Objects.requireNonNull(getSupportActionBar()).hide(); // hide action bar in home activity
+//        Objects.requireNonNull(getSupportActionBar()).hide(); // hide action bar in home activity
+        setupActionbar(getString(R.string.app_name), false);
 
         initViews();
         setListeners();
