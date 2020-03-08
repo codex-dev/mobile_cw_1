@@ -19,7 +19,7 @@ public class ActCommon extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_common);
-        setupActionbar("",false);
+        setupActionbar("", false);
 
     }
 
@@ -32,7 +32,8 @@ public class ActCommon extends AppCompatActivity {
         TextView tvTitle = actionbarView.findViewById(R.id.tvTitle);
 
         if (showBackIcon) {
-            ivBack.setVisibility(View.VISIBLE);
+            ivBack.setImageResource(R.drawable.ico_back_arrow);
+            tvTitle.setPadding(0, 0, 0, 0);
             tvTitle.setGravity(Gravity.CENTER);
             ivBack.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -40,8 +41,9 @@ public class ActCommon extends AppCompatActivity {
                     onBackPressed();
                 }
             });
-        } else {
-            ivBack.setVisibility(View.GONE);
+        } else { // home ui
+            ivBack.setImageResource(R.drawable.ico_paw);
+            tvTitle.setPadding(100, 0, 0, 0);
             tvTitle.setGravity(Gravity.START);
         }
         tvTitle.setText(title);

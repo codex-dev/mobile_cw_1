@@ -1,16 +1,18 @@
 package com.example.ravindu.mobilecoursework.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ravindu.mobilecoursework.R;
-
-import java.util.Objects;
 
 public class ActHome extends ActCommon implements View.OnClickListener,
         CompoundButton.OnCheckedChangeListener {
@@ -77,9 +79,29 @@ public class ActHome extends ActCommon implements View.OnClickListener,
             Toast.makeText(this, getString(R.string.countdown_off), Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.exit_warning_title))
+                .setMessage(getString(R.string.exit_warning_message))
+                .setNegativeButton(R.string.btn_yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActHome.super.onBackPressed();
+                    }
+                })
+                .setPositiveButton(R.string.btn_no, null)
+                .setIcon(R.drawable.ico_alert);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        Button nbutton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        nbutton.setTextColor(Color.RED);
+    }
 }
 
 /*
-* References -
-* https://stackoverflow.com/a/45632962 - Why should one use Objects.requireNonNull()?
-* */
+ * References -
+ * https://stackoverflow.com/a/45632962 - Why should one use Objects.requireNonNull()?
+ * https://stackoverflow.com/a/2115770 - How do I display an alert dialog on Android?
+ * */
