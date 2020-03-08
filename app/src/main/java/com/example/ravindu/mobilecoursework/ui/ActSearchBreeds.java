@@ -22,7 +22,7 @@ import com.example.ravindu.mobilecoursework.util.RandomPick;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ActSearchBreeds extends ActCommon implements View.OnClickListener {
+public class ActSearchBreeds extends ActCommon implements View.OnClickListener, TextView.OnEditorActionListener {
 
     private BreedTypes breedTypes;
     private Handler handler;
@@ -62,61 +62,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener {
     private void setEventListeners() {
         btnSubmit.setOnClickListener(this);
         btnStop.setOnClickListener(this);
-
-        // perform search when search key pressed on soft input keyboard
-        etSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH && validateBreedName()) {
-                    showSlideshow(v.getText());
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-    private void showSlideshow(CharSequence text) {
-        // hide soft input keyboard if still visible
-        etSearchText.clearFocus();
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        Objects.requireNonNull(in).hideSoftInputFromWindow(etSearchText.getWindowToken(), 0);
-        Toast.makeText(this, "Images Fetched for \"" + text + "\"", Toast.LENGTH_SHORT).show(); // for testing purpose
-
-        // load relevant breed images as the result
-        for (DogBreed dogBreed : breedTypes.getListDogBreeds()) {
-            if (etSearchText.getText().toString().trim().equalsIgnoreCase(dogBreed.getBreedName())) {
-                imagesList = dogBreed.getImageList();
-                break;
-            }
-        }
-
-        if (imagesList != null) {
-            //show images in a random order
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    //show images in a random order
-
-                    int selectedIndex = RandomPick.generateRandomNumber(0, (imagesList.size() - 1));
-                    while (previousIndex == selectedIndex) {
-                        selectedIndex = RandomPick.generateRandomNumber(0, (imagesList.size() - 1));
-                    }
-                    previousIndex = selectedIndex;
-
-                    ivDogImage.setImageResource(imagesList.get(selectedIndex).getImageDrawable());
-                    handler.postDelayed(this, 5000);
-                }
-            };
-
-            etSearchText.setEnabled(false);
-            btnSubmit.setEnabled(false);
-            btnStop.setEnabled(true);
-            btnStop.setBackground(getDrawable(R.drawable.btn_selector));
-            btnSubmit.setBackground(getDrawable(R.drawable.bg_btn_disabled));
-            lytSlideshow.setVisibility(View.VISIBLE);
-            handler.postDelayed(runnable, 0);
-        }
+        etSearchText.setOnEditorActionListener(this);
     }
 
     private boolean validateBreedName() {
@@ -135,25 +81,85 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener {
         }
     }
 
+    private void fetchResults(CharSequence text) {
+        // hide soft input keyboard if still visible
+        etSearchText.clearFocus();
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(in).hideSoftInputFromWindow(etSearchText.getWindowToken(), 0);
+        Toast.makeText(this, "Images Fetched for \"" + text + "\"", Toast.LENGTH_SHORT).show(); // for testing purpose
+
+        // load relevant breed images as the result
+        for (DogBreed dogBreed : breedTypes.getListDogBreeds()) {
+            if (etSearchText.getText().toString().trim().equalsIgnoreCase(dogBreed.getBreedName())) {
+                imagesList = dogBreed.getImageList();
+                break;
+            }
+        }
+
+        if (imagesList != null) {
+            startSlideshow();
+        }
+    }
+
+    private void startSlideshow() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                //show images in a random order
+                int selectedIndex = RandomPick.generateRandomNumber(0, (imagesList.size() - 1));
+                while (previousIndex == selectedIndex) { // to avoid setting same image for the next image
+                    selectedIndex = RandomPick.generateRandomNumber(0, (imagesList.size() - 1));
+                }
+                previousIndex = selectedIndex;
+
+                ivDogImage.setImageResource(imagesList.get(selectedIndex).getImageDrawable());
+                handler.postDelayed(this, 5000);
+            }
+        };
+
+        handler.postDelayed(runnable, 0); // start runnable without any delay
+
+        etSearchText.setEnabled(false);
+        btnSubmit.setEnabled(false);
+        btnStop.setEnabled(true);
+        btnStop.setBackground(getDrawable(R.drawable.btn_selector));
+        btnSubmit.setBackground(getDrawable(R.drawable.bg_btn_disabled));
+        lytSlideshow.setVisibility(View.VISIBLE);
+    }
+
+    private void stopSlideshow() {
+        etSearchText.setEnabled(true);
+        btnSubmit.setEnabled(true);
+        btnStop.setEnabled(false);
+        btnStop.setBackground(getDrawable(R.drawable.bg_btn_disabled));
+        btnSubmit.setBackground(getDrawable(R.drawable.btn_selector));
+        previousIndex = -1;
+        handler.removeCallbacksAndMessages(null);
+        Toast.makeText(this, "Slideshow Stopped", Toast.LENGTH_SHORT).show(); // for testing purpose
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSubmit:
                 if (validateBreedName()) {
-                    showSlideshow(etSearchText.getText());
+                    fetchResults(etSearchText.getText());
                 }
                 break;
             case R.id.btnStop:
-                //if runnable thread is running, stop it
-                etSearchText.setEnabled(true);
-                btnSubmit.setEnabled(true);
-                btnStop.setEnabled(false);
-                btnStop.setBackground(getDrawable(R.drawable.bg_btn_disabled));
-                btnSubmit.setBackground(getDrawable(R.drawable.btn_selector));
-                handler.removeCallbacksAndMessages(null);
-                Toast.makeText(this, "Slideshow Stopped", Toast.LENGTH_SHORT).show(); // for testing purpose
+                stopSlideshow();
                 break;
         }
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        // perform search when search key pressed on soft input keyboard
+        if (actionId == EditorInfo.IME_ACTION_SEARCH && validateBreedName()) {
+            fetchResults(v.getText());
+            return true;
+        }
+        return false;
     }
 }
 
