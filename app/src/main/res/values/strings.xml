@@ -12,7 +12,6 @@
     <string name="countdown_off">Countdown Timer Off</string>
     <string name="select_breed">Select the breed</string>
     <string name="select_dog_image">Select the dog image :</string>
-    <string name="btn_submit">Submit</string>
     <string name="btn_next">Next</string>
     <string name="msg_correct">CORRECT!</string>
     <string name="msg_wrong">WRONG!</string>
@@ -23,6 +22,9 @@
     <string name="btn_no">No</string>
     <string name="exit_warning_title">Exit PawMate</string>
     <string name="exit_warning_message">Are you sure you want to exit from PawMate?</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_stop">Stop</string>
+    <string name="search_hint">Input Dog Breed</string>
 
     <!-- Dog Breeds -->
     <string name="beagle">Beagle</string>

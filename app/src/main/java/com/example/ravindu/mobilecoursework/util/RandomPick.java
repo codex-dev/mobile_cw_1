@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class RandomPick {
 
-    private static int generateRandomNumber(int min, int max) {
+    public static int generateRandomNumber(int min, int max) {
         double value = (Math.random() * ((max - min) + 1)) + min;
         return (int) value;
     }

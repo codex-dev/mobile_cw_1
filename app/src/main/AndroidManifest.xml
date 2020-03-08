@@ -14,6 +14,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".ui.ActSearchBreeds"
+            android:windowSoftInputMode="stateHidden"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".ui.ActIdentifyDog"

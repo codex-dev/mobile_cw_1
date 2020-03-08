@@ -18,4 +18,5 @@
     <color name="green">#00FF00</color>
 
     <color name="ic_launcher_background">#03a9f4</color>
+    <color name="btn_disabled">#607D8B</color>
 </resources>

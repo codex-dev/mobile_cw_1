@@ -1,10 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/uiSearchBreed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:scrollbars="vertical"
     tools:context=".ui.ActSearchBreeds">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="15dp">
 
+        <EditText
+            android:id="@+id/etSearchText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_grey_outline"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="10dp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/btnSubmit"
+            style="@style/ButtonStyle"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_submit" />
+
+        <LinearLayout
+            android:id="@+id/lytSlideshow"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivDogImage"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/bg_grey_outline"
+                android:contentDescription="@string/dog_image"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/btnStop"
+                style="@style/ButtonStyle"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:text="@string/btn_stop" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
