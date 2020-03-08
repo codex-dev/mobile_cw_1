@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
 
     private BreedTypes breedTypes;
     private Handler handler;
+    private Animation animEnterExit;
 
     private LinearLayout lytSlideshow;
     private EditText etSearchText;
@@ -45,6 +48,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
 
         breedTypes = new BreedTypes();
         handler = new Handler();
+        animEnterExit = AnimationUtils.loadAnimation(ActSearchBreeds.this, R.anim.slider_animation);
 
         initViews();
         setEventListeners();
@@ -112,7 +116,9 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
                 }
                 previousIndex = selectedIndex;
 
+                ivDogImage.startAnimation(animEnterExit);
                 ivDogImage.setImageResource(imagesList.get(selectedIndex).getImageDrawable());
+
                 handler.postDelayed(this, 5000);
             }
         };
@@ -128,13 +134,16 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
     }
 
     private void stopSlideshow() {
+        handler.removeCallbacksAndMessages(null);
+
         etSearchText.setEnabled(true);
         btnSubmit.setEnabled(true);
         btnStop.setEnabled(false);
         btnStop.setBackground(getDrawable(R.drawable.bg_btn_disabled));
         btnSubmit.setBackground(getDrawable(R.drawable.btn_selector));
+        ivDogImage.clearAnimation();
+
         previousIndex = -1;
-        handler.removeCallbacksAndMessages(null);
         Toast.makeText(this, "Slideshow Stopped", Toast.LENGTH_SHORT).show(); // for testing purpose
     }
 
@@ -168,4 +177,6 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
  * https://stackoverflow.com/a/3205405 - Android: how to make keyboard enter button say “Search” and handle its click?
  * https://stackoverflow.com/a/42829176
  * https://stackoverflow.com/a/22719065 - Stop handler.postDelayed()
+ * https://stackoverflow.com/a/3919813 - Android: How can I stop an infinite animation applied on an ImageView?
+ * https://stackoverflow.com/a/4112620 - How to stop an animation (cancel() does not work)
  * */
