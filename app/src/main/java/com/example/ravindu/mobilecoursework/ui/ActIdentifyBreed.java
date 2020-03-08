@@ -28,7 +28,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     private boolean timerEnabled; // whether countdown timer is enabled
     private String breedName; // selected breed name for the question
     private long remainingTime; // remaining time to continue countdown (when resumed)
-    private final long timerResetValue = 10000; // default countdown time period
+    private final long timerResetValue = 11000; // default countdown time period
     private int nextClickCCount = 0; // next button click count
 
     @Override
