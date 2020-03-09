@@ -22,13 +22,14 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     private ImageView ivDogImage;
     private TextView tvTimer, tvResult, tvAnswer, btnSubmit;
     private Spinner spnBreed;
+    private String questionBreedName; // selected breed name for the question
     private LinearLayout lytResult;
-    private CountDownTimer countDownTimer;
 
+    private CountDownTimer countDownTimer;
     private boolean timerEnabled; // whether countdown timer is enabled
-    private String breedName; // selected breed name for the question
     private long remainingTime; // remaining time to continue countdown (when resumed)
     private final long timerResetValue = 11000; // default countdown time period
+
     private int nextClickCCount = 0; // next button click count
 
     @Override
@@ -139,7 +140,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         if (nextClickCCount < breedTypes.getAllImagesCount()) {
             nextClickCCount++;
             RandomPick.Response response = RandomPick.pickRandomImage(breedTypes);
-            breedName = response.getSelectedBreedNamesList().get(0);
+            questionBreedName = response.getSelectedBreedNamesList().get(0);
             breedTypes = response.getBreedTypes();
             ivDogImage.setImageResource(response.getSelectedDogImagesList().get(0).getImageDrawable());
 
@@ -155,7 +156,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     private void evaluateAnswer() {
         lytResult.setVisibility(View.VISIBLE);
 
-        if (spnBreed.getSelectedItem().equals(breedName)) { // correct answer
+        if (spnBreed.getSelectedItem().equals(questionBreedName)) { // correct answer
             tvResult.setText(getString(R.string.msg_correct));
             tvResult.setTextColor(Color.GREEN);
             tvResult.setCompoundDrawablesRelativeWithIntrinsicBounds(getDrawable(R.drawable.ic_correct), null, null, null);
@@ -166,7 +167,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
             tvResult.setTextColor(Color.RED);
             tvResult.setCompoundDrawablesRelativeWithIntrinsicBounds(getDrawable(R.drawable.ic_wrong), null, null, null);
             tvAnswer.setVisibility(View.VISIBLE);
-            tvAnswer.setText(getString(R.string.correct_answer) + " " + breedName);
+            tvAnswer.setText(getString(R.string.correct_answer) + " " + questionBreedName);
         }
     }
 }
