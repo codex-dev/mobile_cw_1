@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Remaining Time 00:09"
+            android:text="@string/remaining_time"
             android:textColor="@color/red"
             android:textSize="16sp"
             android:visibility="gone" />

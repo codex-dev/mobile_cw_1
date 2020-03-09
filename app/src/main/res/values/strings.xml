@@ -39,6 +39,8 @@
     <string name="afghan_hound">Afghan Hound</string>
     <string name="french_bulldog">French Bulldog</string>
     <string name="silky_terrier">Silky Terrier</string>
+    <string name="error_input_dog_breed">Please input dog breed</string>
+    <string name="error_no_matching_dog_breed">No matching dog breed found</string>
 
     <string-array name="array_dog_breeds">
         <item>@string/afghan_hound</item>

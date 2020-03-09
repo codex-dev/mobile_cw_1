@@ -48,12 +48,13 @@ public class ActCommon extends AppCompatActivity {
             });
         } else { // home ui
             ivBack.setImageResource(R.drawable.ico_paw);
-            tvTitle.setPadding(120, 0, 0, 0);
+            tvTitle.setPadding(100, 0, 0, 0);
             tvTitle.setGravity(Gravity.START);
         }
         tvTitle.setText(title);
     }
 
+    // hide soft input keyboard when touched outside of a EditText
     public void hideKeyboard(View view, final Activity activity) {
         // Set up touch listener for non-text box views to hide keyboard.
         if (!(view instanceof EditText)) {

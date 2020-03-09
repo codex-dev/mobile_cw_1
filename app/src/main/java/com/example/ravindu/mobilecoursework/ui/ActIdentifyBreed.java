@@ -70,7 +70,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         lytResult = findViewById(R.id.lytResult);
         tvResult = findViewById(R.id.tvResult);
         tvAnswer = findViewById(R.id.tvAnswer);
-        btnSubmit = findViewById(R.id.btnNext);
+        btnSubmit = findViewById(R.id.btnSubmit);
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,
@@ -110,7 +110,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnNext) {
+        if (view.getId() == R.id.btnSubmit) {
             if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
                 btnSubmit.setText(getString(R.string.btn_next));
                 spnBreed.setEnabled(false);

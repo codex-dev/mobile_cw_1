@@ -56,7 +56,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
 
     private void initViews() {
         etSearchText = findViewById(R.id.etSearchText);
-        btnSubmit = findViewById(R.id.btnNext);
+        btnSubmit = findViewById(R.id.btnSubmit);
         lytSlideshow = findViewById(R.id.lytSlideshow);
         ivDogImage = findViewById(R.id.ivDogImage);
         btnStop = findViewById(R.id.btnStop);
@@ -71,7 +71,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
 
     private boolean validateBreedName() {
         if (etSearchText.getText() == null || etSearchText.getText().toString().trim().length() == 0) {
-            Toast.makeText(this, "Please input dog breed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_input_dog_breed), Toast.LENGTH_SHORT).show();
             return false;
         } else {
             String[] breedNames = getResources().getStringArray(R.array.array_dog_breeds);
@@ -80,7 +80,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
                     return true;
                 }
             }
-            Toast.makeText(this, "No matching dog breed found.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_no_matching_dog_breed), Toast.LENGTH_SHORT).show();
             return false;
         }
     }
@@ -90,7 +90,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
         etSearchText.clearFocus();
         InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Objects.requireNonNull(in).hideSoftInputFromWindow(etSearchText.getWindowToken(), 0);
-        Toast.makeText(this, "Images fetched for \"" + text + "\"", Toast.LENGTH_SHORT).show(); // for testing purpose
+//        Toast.makeText(this, "Images fetched for \"" + text + "\"", Toast.LENGTH_SHORT).show(); // for testing purpose
 
         // load relevant breed images as the result
         for (DogBreed dogBreed : breedTypes.getListDogBreeds()) {
@@ -150,7 +150,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnNext:
+            case R.id.btnSubmit:
                 if (validateBreedName()) {
                     fetchResults(etSearchText.getText());
                 }

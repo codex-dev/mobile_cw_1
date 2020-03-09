@@ -29,7 +29,7 @@
             android:padding="10dp" />
 
         <TextView
-            android:id="@+id/btnNext"
+            android:id="@+id/btnSubmit"
             style="@style/ButtonStyle"
             android:layout_width="150dp"
             android:layout_height="45dp"
