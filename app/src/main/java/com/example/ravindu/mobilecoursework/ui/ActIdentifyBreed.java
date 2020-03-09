@@ -30,7 +30,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
     private long remainingTime; // remaining time to continue countdown (when resumed)
     private final long timerResetValue = 11000; // default countdown time period
 
-    private int nextClickCCount = 0; // next button click count
+    private int nextClickCount = 0; // next button click count
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,14 +137,14 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
 
     // pick and set random dog image
     private boolean setRandomImage() {
-        if (nextClickCCount < breedTypes.getAllImagesCount()) {
-            nextClickCCount++;
+        if (nextClickCount < breedTypes.getAllImagesCount()) {
+            nextClickCount++;
             RandomPick.Response response = RandomPick.pickRandomImage(breedTypes);
             questionBreedName = response.getSelectedBreedNamesList().get(0);
             breedTypes = response.getBreedTypes();
             ivDogImage.setImageResource(response.getSelectedDogImagesList().get(0).getImageDrawable());
 
-            Toast.makeText(this, "Image No. " + nextClickCCount, Toast.LENGTH_SHORT).show(); // for testing purpose
+//            Toast.makeText(this, "Image No. " + nextClickCount, Toast.LENGTH_SHORT).show(); // for testing purpose
             return true; // return true if setting next random image is successful.
         } else {
             Toast.makeText(this, getString(R.string.no_images_left), Toast.LENGTH_SHORT).show();

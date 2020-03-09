@@ -48,7 +48,7 @@ public class ActCommon extends AppCompatActivity {
             });
         } else { // home ui
             ivBack.setImageResource(R.drawable.ico_paw);
-            tvTitle.setPadding(100, 0, 0, 0);
+            tvTitle.setPadding(120, 0, 0, 0);
             tvTitle.setGravity(Gravity.START);
         }
         tvTitle.setText(title);
