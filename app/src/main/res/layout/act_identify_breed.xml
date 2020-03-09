@@ -22,7 +22,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:padding="10dp"
-            android:background="@drawable/bg_grey_outline"
+            android:background="@drawable/bg_outline_grey"
             android:contentDescription="@string/dog_image"/>
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_grey_outline"
+            android:background="@drawable/bg_outline_grey"
             android:padding="5dp">
 
             <Spinner
@@ -90,7 +90,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btnNext"
             style="@style/ButtonStyle"
             android:layout_width="150dp"
             android:layout_height="45dp"

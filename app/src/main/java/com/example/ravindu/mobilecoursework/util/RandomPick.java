@@ -47,8 +47,10 @@ public class RandomPick {
                 String breedName = breedTypes.getListDogBreeds().get(indexBreed).getBreedName();
 
                 response = new Response();
-                response.setSelectedBreed(breedName);
-                response.setSelectedDogImagesList(new ArrayList<DogImage>(){{
+                response.setSelectedBreedNamesList(new ArrayList<String>(){{
+                    add(breedName);
+                }});
+                response.setSelectedDogImagesList(new ArrayList<DogImage>() {{
                     add(dogImage);
                 }});
                 response.setBreedTypes(breedTypes);
@@ -57,18 +59,54 @@ public class RandomPick {
         return response;
     }
 
-    public static class Response {
 
-        private String selectedBreed;
+    public static Response pick3RandomImages(BreedTypes breedTypes) {
+        ArrayList<String> breedNameList = new ArrayList<>();
+        ArrayList<DogImage> dogImageList = new ArrayList<>();
+
+        int indexBreed = generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+        int indexImage = generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+                .getImageList().size() - 1);
+        boolean imageHasAppeared;
+        String breedName;
+
+        while ((breedNameList.size() < 3)) {
+            DogImage dogImage = breedTypes.getListDogBreeds().get(indexBreed).getImageList()
+                    .get(indexImage);
+            imageHasAppeared = dogImage.isHasAppeared();
+            breedName = breedTypes.getListDogBreeds().get(indexBreed).getBreedName();
+
+            if (breedNameList.contains(breedName) || imageHasAppeared) {
+                indexBreed = generateRandomNumber(0, breedTypes.getListDogBreeds().size() - 1);
+                indexImage = generateRandomNumber(0, breedTypes.getListDogBreeds().get(indexBreed)
+                        .getImageList().size() - 1);
+            } else {
+                dogImage.setHasAppeared(true);
+                dogImageList.add(dogImage);
+                breedNameList.add(breedName);
+            }
+        }
+
+        Response response = new Response();
+        response.setSelectedBreedNamesList(breedNameList);
+        response.setSelectedDogImagesList(dogImageList);
+        response.setBreedTypes(breedTypes);
+
+        return response;
+    }
+
+
+    public static class Response {
+        private ArrayList<String> listSelectedBreedNames;
         private ArrayList<DogImage> listSelectedDogImages;
         private BreedTypes breedTypes;
 
-        public String getSelectedBreed() {
-            return selectedBreed;
+        public ArrayList<String> getSelectedBreedNamesList() {
+            return listSelectedBreedNames;
         }
 
-        void setSelectedBreed(String selectedBreed) {
-            this.selectedBreed = selectedBreed;
+        void setSelectedBreedNamesList(ArrayList<String> listSelectedBreedNames) {
+            this.listSelectedBreedNames = listSelectedBreedNames;
         }
 
         public ArrayList<DogImage> getSelectedDogImagesList() {
@@ -90,8 +128,8 @@ public class RandomPick {
 }
 
 /*
-* References -
-*
-* https://www.geeksforgeeks.org/static-class-in-java/ - Static class in Java
-* */
+ * References -
+ *
+ * https://www.geeksforgeeks.org/static-class-in-java/ - Static class in Java
+ * */
 

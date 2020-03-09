@@ -69,7 +69,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         lytResult = findViewById(R.id.lytResult);
         tvResult = findViewById(R.id.tvResult);
         tvAnswer = findViewById(R.id.tvAnswer);
-        btnSubmit = findViewById(R.id.btnSubmit);
+        btnSubmit = findViewById(R.id.btnNext);
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item,
@@ -109,7 +109,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btnSubmit) {
+        if (view.getId() == R.id.btnNext) {
             if (btnSubmit.getText().equals(getString(R.string.btn_submit))) {
                 btnSubmit.setText(getString(R.string.btn_next));
                 spnBreed.setEnabled(false);
@@ -139,7 +139,7 @@ public class ActIdentifyBreed extends ActCommon implements View.OnClickListener 
         if (nextClickCCount < breedTypes.getAllImagesCount()) {
             nextClickCCount++;
             RandomPick.Response response = RandomPick.pickRandomImage(breedTypes);
-            breedName = response.getSelectedBreed();
+            breedName = response.getSelectedBreedNamesList().get(0);
             breedTypes = response.getBreedTypes();
             ivDogImage.setImageResource(response.getSelectedDogImagesList().get(0).getImageDrawable());
 

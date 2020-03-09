@@ -56,7 +56,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
 
     private void initViews() {
         etSearchText = findViewById(R.id.etSearchText);
-        btnSubmit = findViewById(R.id.btnSubmit);
+        btnSubmit = findViewById(R.id.btnNext);
         lytSlideshow = findViewById(R.id.lytSlideshow);
         ivDogImage = findViewById(R.id.ivDogImage);
         btnStop = findViewById(R.id.btnStop);
@@ -150,7 +150,7 @@ public class ActSearchBreeds extends ActCommon implements View.OnClickListener, 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnSubmit:
+            case R.id.btnNext:
                 if (validateBreedName()) {
                     fetchResults(etSearchText.getText());
                 }
